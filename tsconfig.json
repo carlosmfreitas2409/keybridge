@@ -21,7 +21,9 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
+      "@main/*": ["./src/main/*"],
       "@shared/*": ["./src/shared/*"],
+      "@components/*": ["./src/renderer/components/*"],
     }
   },
   "include": [

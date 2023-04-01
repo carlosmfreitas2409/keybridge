@@ -11,12 +11,12 @@ export function createWindow(settings: WindowProps) {
 
   const devServerURL = createURLRoute(
     process.env.ELECTRON_RENDERER_URL!,
-    'main',
+    settings.id,
   );
 
   const fileRoute = createFileRoute(
     path.join(process.cwd(), 'src/renderer/index.html'),
-    'main',
+    settings.id,
   );
 
   if (ENVIRONMENT.IS_DEV && ENVIRONMENT.ELECTRON.RENDERER_URL) {

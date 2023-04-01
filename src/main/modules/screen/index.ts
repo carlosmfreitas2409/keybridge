@@ -12,4 +12,8 @@ export class ScreenModule {
     this.isScreenVisible ? this.window.hide() : this.window.show();
     this.isScreenVisible = !this.isScreenVisible;
   }
+
+  resizeWindow(width: number, height: number) {
+    this.window.setBounds({ width, height });
+  }
 }
