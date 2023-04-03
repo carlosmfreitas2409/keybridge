@@ -2,15 +2,17 @@ import { BrowserWindow } from 'electron';
 
 export class ScreenModule {
   private window: BrowserWindow;
-  private isScreenVisible = true;
 
   constructor(window: BrowserWindow) {
     this.window = window;
   }
 
+  hideWindow() {
+    this.window.hide();
+  }
+
   toggleWindowVisibility() {
-    this.isScreenVisible ? this.window.hide() : this.window.show();
-    this.isScreenVisible = !this.isScreenVisible;
+    this.window.isVisible() ? this.window.hide() : this.window.show();
   }
 
   resizeWindow(width: number, height: number) {

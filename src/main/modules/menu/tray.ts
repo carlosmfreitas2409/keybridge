@@ -1,6 +1,6 @@
 import { Tray } from 'electron';
 
-import { APP } from '@shared/constants/app';
+import { APP } from '@shared/constants';
 
 import { setVirtualState } from '../state';
 import { createContextMenu, trayIconPath } from './context';
