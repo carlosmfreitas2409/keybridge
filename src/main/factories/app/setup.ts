@@ -15,5 +15,11 @@ export function makeAppSetup(createWindow: () => BrowserWindow) {
 
   app.commandLine.appendSwitch('enable-transparent-visuals');
 
+  app.setLoginItemSettings({
+    openAtLogin: true,
+  });
+
   return window;
 }
+
+app.commandLine.appendSwitch('force-color-profile', 'srgb');
