@@ -1,22 +1,21 @@
-import path from 'node:path';
-import process from 'node:process';
-import { BrowserWindow } from 'electron';
 import { createFileRoute, createURLRoute } from 'electron-router-dom';
+import { BrowserWindow } from 'electron';
+import { join } from 'node:path';
 
 import { ENVIRONMENT } from '@shared/constants';
 import { WindowProps } from '@shared/types';
 
-export function createWindow(settings: WindowProps) {
+export function createWindow({ id, ...settings }: WindowProps) {
   const window = new BrowserWindow(settings);
 
   const devServerURL = createURLRoute(
-    process.env.ELECTRON_RENDERER_URL!,
-    settings.id,
+    process.env['ELECTRON_RENDERER_URL']!,
+    id,
   );
 
   const fileRoute = createFileRoute(
-    path.join(process.cwd(), 'src/renderer/index.html'),
-    settings.id,
+    join(__dirname, '../renderer/index.html'),
+    id,
   );
 
   if (ENVIRONMENT.IS_DEV && ENVIRONMENT.ELECTRON.RENDERER_URL) {
