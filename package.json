@@ -1,15 +1,28 @@
 {
   "name": "keybridge",
-  "displayName": "Keybridge",
-  "version": "1.0.0",
+  "displayName": "KeyBridge",
+  "description": "",
+  "version": "0.0.1",
+  "main": "./node_modules/.dev/main/index.js",
+  "resources": "src/resources",
   "license": "MIT",
-  "main": "./out/main/index.js",
+  "author": {
+    "name": "Carlos Eduardo",
+    "email": "carlos@freitas.eti.br"
+  },
   "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
     "start": "electron-vite preview",
     "dev": "electron-vite dev --watch",
-    "build": "electron-vite build",
-    "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
-    "format": "prettier --write ."
+    "compile:app": "electron-vite build",
+    "compile:packageJSON": "node ./bin/modules/postbuild.js",
+    "prebuild": "run-s compile:app compile:packageJSON",
+    "build": "electron-builder --"
+  },
+  "dependencies": {
+    "mathjs": "^11.7.0",
+    "phosphor-react": "^1.4.1"
   },
   "devDependencies": {
     "@linaria/vite": "^4.2.9",
@@ -20,22 +33,20 @@
     "@typescript-eslint/parser": "^5.56.0",
     "@vitejs/plugin-react-swc": "^3.2.0",
     "electron": "^23.2.0",
+    "electron-builder": "^23.6.0",
     "electron-vite": "^1.0.20",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.8.7",
     "typescript": "^5.0.2",
-    "vite-tsconfig-paths": "^4.0.7"
-  },
-  "dependencies": {
-    "@linaria/core": "^4.2.8",
-    "@linaria/react": "^4.3.6",
-    "electron-router-dom": "^1.0.5",
-    "mathjs": "^11.7.0",
-    "phosphor-react": "^1.4.1",
+    "vite-tsconfig-paths": "^4.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.9.0"
+    "react-router-dom": "^6.9.0",
+    "electron-router-dom": "^1.0.5",
+    "@linaria/core": "^4.2.8",
+    "@linaria/react": "^4.3.6"
   }
 }

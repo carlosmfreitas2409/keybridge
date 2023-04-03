@@ -1,14 +1,15 @@
 import { Menu } from 'electron';
-import path from 'node:path';
-import process from 'node:process';
+import { join } from 'node:path';
 
 import { APP, SHORTCUTS } from '@shared/constants';
 
 import { getVirtualState } from '../state';
 
-export const trayIconPath = path.resolve(
-  process.cwd(),
-  'resources',
+export const trayIconPath = join(
+  __dirname,
+  '..',
+  'renderer',
+  'tray',
   'trayTemplate.png',
 );
 
