@@ -25,11 +25,11 @@ export function createWindow(settings: WindowProps) {
     window.loadFile(...fileRoute);
   }
 
-  window.on('ready-to-show', () => {
-    window.show();
-  });
-
   window.on('closed', window.destroy);
+
+  window.on('blur', () => {
+    window.hide();
+  });
 
   return window;
 }
