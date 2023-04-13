@@ -1,9 +1,9 @@
 import { ipcMain } from 'electron';
 
 import { getVirtualState } from '@main/modules';
-import { IPC } from '@shared/constants/ipc';
+import { IPC } from '@shared/constants';
 
-export function registerResizeWindowByIPC() {
+export function registerWindowByIPC() {
   const { screen } = getVirtualState();
   const { RESIZE } = IPC.WINDOWS;
 

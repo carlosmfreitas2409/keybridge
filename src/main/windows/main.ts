@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 
-import { ENVIRONMENT } from '@shared/constants';
+import { ENVIRONMENT, PLATFORM } from '@shared/constants';
 
 import {
   ScreenModule,
@@ -10,7 +10,7 @@ import {
 } from '../modules';
 
 import { createWindow } from '../factories';
-import { registerResizeWindowByIPC } from './ipcs/size';
+import { registerWindowByIPC } from './ipcs/window';
 
 export function MainWindow() {
   const mainWindow = createWindow({
@@ -35,11 +35,14 @@ export function MainWindow() {
 
   setVirtualState({ screen: screenModule, mainWindow });
 
+  PLATFORM.IS_MAC && mainWindow.setWindowButtonVisibility(false);
   ENVIRONMENT.IS_DEV && mainWindow.webContents.openDevTools({ mode: 'detach' });
+
+  mainWindow.setAlwaysOnTop(true, 'screen-saver');
 
   createTrayMenu();
   loadShortcutsModule();
-  registerResizeWindowByIPC();
+  registerWindowByIPC();
 
   return mainWindow;
 }

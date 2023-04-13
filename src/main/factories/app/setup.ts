@@ -1,6 +1,6 @@
 import { app, BrowserWindow } from 'electron';
 
-import { PLATFORM } from '@shared/constants';
+import { PLATFORM, ENVIRONMENT } from '@shared/constants';
 
 export function makeAppSetup(createWindow: () => BrowserWindow) {
   let window = createWindow();
@@ -15,5 +15,13 @@ export function makeAppSetup(createWindow: () => BrowserWindow) {
 
   app.commandLine.appendSwitch('enable-transparent-visuals');
 
+  !ENVIRONMENT.IS_DEV &&
+    app.setLoginItemSettings({
+      openAtLogin: true,
+      openAsHidden: true,
+    });
+
   return window;
 }
+
+app.commandLine.appendSwitch('force-color-profile', 'srgb');

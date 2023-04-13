@@ -46,6 +46,7 @@ export function MainScreen() {
           type="text"
           placeholder="Search for apps and commands..."
           onChange={(event) => setPrompt(event.target.value)}
+          autoFocus
         />
       </NavigationBar>
 
