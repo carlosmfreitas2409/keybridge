@@ -1,23 +1,10 @@
-import { app, globalShortcut } from 'electron';
-
-import { SHORTCUTS } from '@shared/constants';
-
+import { globalShortcut } from 'electron';
 import { getVirtualState } from './state';
 
 export function loadShortcutsModule() {
   const { screen } = getVirtualState();
 
-  globalShortcut.register(SHORTCUTS.TOGGLE_APP, () => {
+  globalShortcut.register('Shift+Alt+2', () => {
     screen.toggleWindowVisibility();
-  });
-
-  app.on('browser-window-focus', () => {
-    globalShortcut.register(SHORTCUTS.HIDE_APP, () => {
-      screen.hideWindow();
-    });
-  });
-
-  app.on('browser-window-blur', () => {
-    globalShortcut.unregister(SHORTCUTS.HIDE_APP);
   });
 }

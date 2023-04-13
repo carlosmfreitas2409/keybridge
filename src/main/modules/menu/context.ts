@@ -1,7 +1,7 @@
 import { Menu } from 'electron';
 import { join } from 'node:path';
 
-import { APP, SHORTCUTS } from '@shared/constants';
+import { APP } from '@shared/constants/app';
 
 import { getVirtualState } from '../state';
 
@@ -22,7 +22,7 @@ export function createContextMenu() {
     {
       type: 'normal',
       label: APP.TITLE,
-      accelerator: SHORTCUTS.TOGGLE_APP,
+      accelerator: 'Shift+Alt+2',
       enabled: false,
     },
     {
