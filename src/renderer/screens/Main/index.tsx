@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 
-import { CommandItemProps } from '@shared/types';
+import type { CommandItemProps } from '@shared/types';
 
 import { Item } from '@components/List/Item';
 
@@ -14,22 +14,22 @@ export function MainScreen() {
   function handlePromptChange(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
     KeyBridge.search(value);
+
+    KeyBridge.resizeWindow(
+      document.body.clientWidth,
+      document.body.clientHeight,
+    );
   }
 
-  function handleExecuteItem() {
-    KeyBridge.executeItem();
+  function handleSelectItem(item: CommandItemProps) {
+    KeyBridge.onExecuteItem(item);
   }
 
   useEffect(() => {
     KeyBridge.whenSearchReturns((results) => {
       setSearchResults(results);
     });
-
-    KeyBridge.resizeWindow(
-      document.body.clientWidth,
-      document.body.clientHeight,
-    );
-  }, [prompt]);
+  }, []);
 
   return (
     <div>
@@ -49,7 +49,7 @@ export function MainScreen() {
             title={item.title}
             description={item.description}
             icon={item.icon}
-            onClick={handleExecuteItem}
+            onClick={() => handleSelectItem(item)}
           />
         ))}
       </ContentBar>

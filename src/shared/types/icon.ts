@@ -1,7 +1,7 @@
 export enum IconType {
-  URL,
-  SVG,
-  EMOJI,
+  URL = 'URL',
+  SVG = 'SVG',
+  EMOJI = 'EMOJI',
 }
 
 export interface Icon {

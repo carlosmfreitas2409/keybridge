@@ -1,5 +1,6 @@
 import { ipcRenderer } from 'electron';
 
+import { CommandItemProps } from '@shared/types';
 import { IPC } from '@shared/constants';
 
 export function search(value: string) {
@@ -16,8 +17,8 @@ export function whenSearchReturns(fn: (...args: any[]) => void) {
   });
 }
 
-export function executeItem() {
-  const { EXECUTE_ITEM } = IPC.SEARCH;
+export async function onExecuteItem(item: CommandItemProps) {
+  const { ON_EXECUTE_ITEM } = IPC.SEARCH;
 
-  ipcRenderer.send(EXECUTE_ITEM);
+  await ipcRenderer.invoke(ON_EXECUTE_ITEM, item);
 }

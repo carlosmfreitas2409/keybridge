@@ -1,4 +1,4 @@
-import type { CommandItemProps, CommandProps } from '@shared/types';
+import type { CommandProps } from '@shared/types';
 
 import { CommandItemEntity } from './command-item-entity';
 
@@ -14,9 +14,9 @@ export abstract class CommandEntity {
     return this._manifest;
   }
 
-  public getItems(query: string): CommandItemProps[] {
+  public getItems(query: string): CommandItemEntity[] {
     this.search(query);
-    return this._items.map(({ item }) => item);
+    return this._items;
   }
 
   public addItems(items: CommandItemEntity[]) {

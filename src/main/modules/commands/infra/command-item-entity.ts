@@ -1,3 +1,5 @@
+import { isDeepStrictEqual } from 'node:util';
+
 import { CommandItemProps } from '@shared/types';
 
 export abstract class CommandItemEntity {
@@ -9,5 +11,15 @@ export abstract class CommandItemEntity {
 
   get item(): CommandItemProps {
     return this._item;
+  }
+
+  public abstract execute(): Promise<void>;
+
+  public equals(props: CommandItemProps): boolean {
+    if (props === null || props === undefined) return false;
+
+    if (!isDeepStrictEqual(this._item, props)) return false;
+
+    return true;
   }
 }

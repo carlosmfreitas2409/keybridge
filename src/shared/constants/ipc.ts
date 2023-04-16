@@ -6,6 +6,6 @@ export const IPC = {
   SEARCH: {
     GET_SEARCH_RESULTS: 'search: get-search-results',
     WHEN_SEARCH_RETURNS: 'search: when-search-returns',
-    EXECUTE_ITEM: 'search: execute-item',
+    ON_EXECUTE_ITEM: 'search: on-execute-item',
   },
 };

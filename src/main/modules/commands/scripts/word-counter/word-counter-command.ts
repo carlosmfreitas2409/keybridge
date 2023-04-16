@@ -16,7 +16,7 @@ export class WordCounterCommand extends CommandEntity {
     });
   }
 
-  public search(query: string): void {
+  public search(): void {
     const currentClipboard = clipboard.readText();
 
     const words = currentClipboard.split(' ').length;
@@ -24,7 +24,7 @@ export class WordCounterCommand extends CommandEntity {
     const characters = Array.from(currentClipboard).length;
 
     const item = new WordCounterCommandItem({
-      title: query,
+      title: 'Word Counter',
       description: `Words: ${words}, Lines: ${lines}, Characters: ${characters}`,
       mode: 'no-view',
       icon: DEFAULT_ICON,
