@@ -22,6 +22,7 @@ export function MainWindow() {
     resizable: false,
     skipTaskbar: true,
     backgroundColor: '#212023',
+    roundedCorners: true,
 
     webPreferences: {
       spellcheck: false,
