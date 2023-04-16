@@ -1,15 +1,24 @@
-import { Icon, IconType } from '@shared/types/icon';
+import { ReactNode } from 'react';
 
-import { Container, LeftContent, IconSVG } from './styles';
+import { Icon, IconType } from '@shared/types';
+
+import { Container, IconSVG, LeftContent, RightContent } from './styles';
 
 interface ItemProps {
   title: string;
   description?: string;
   icon?: Icon;
   onClick?: VoidFunction;
+  rightContent?: ReactNode;
 }
 
-export function Item({ title, description, icon, onClick }: ItemProps) {
+export function Item({
+  title,
+  description,
+  icon,
+  onClick,
+  rightContent,
+}: ItemProps) {
   function getIcon() {
     if (!icon) return;
 
@@ -31,6 +40,8 @@ export function Item({ title, description, icon, onClick }: ItemProps) {
         <strong>{title}</strong>
         <p>{description}</p>
       </LeftContent>
+
+      {rightContent && <RightContent>{rightContent}</RightContent>}
     </Container>
   );
 }

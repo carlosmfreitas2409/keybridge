@@ -19,7 +19,6 @@ export const Container = styled.div`
 export const LeftContent = styled.div`
   display: flex;
   align-items: center;
-
   gap: 10px;
 
   font-size: 0.875rem;
@@ -31,6 +30,11 @@ export const LeftContent = styled.div`
   p {
     color: rgba(255, 255, 255, 0.6);
   }
+`;
+
+export const RightContent = styled.div`
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
 `;
 
 export const IconSVG = styled.span`

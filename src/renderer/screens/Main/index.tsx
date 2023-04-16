@@ -50,6 +50,7 @@ export function MainScreen() {
             description={item.description}
             icon={item.icon}
             onClick={() => handleSelectItem(item)}
+            rightContent={<span>{COMMAND_TYPE[item.type]}</span>}
           />
         ))}
       </ContentBar>
@@ -61,3 +62,9 @@ export function MainScreen() {
     </div>
   );
 }
+
+const COMMAND_TYPE: Record<CommandItemProps['type'], string> = {
+  script: 'Script Command',
+  command: 'Command',
+  application: 'Application',
+};

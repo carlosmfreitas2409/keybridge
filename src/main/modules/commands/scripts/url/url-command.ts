@@ -17,6 +17,7 @@ export class UrlCommand extends CommandEntity {
     const item = new UrlCommandItem({
       title: query,
       mode: 'no-view',
+      type: 'script',
       icon: DEFAULT_ICON,
     });
 

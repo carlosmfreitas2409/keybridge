@@ -11,6 +11,7 @@ interface CommandItemProps {
   description?: string;
   icon: Icon;
   mode: 'view' | 'no-view';
+  type: 'command' | 'script' | 'application';
   keywords?: string[];
 }
 

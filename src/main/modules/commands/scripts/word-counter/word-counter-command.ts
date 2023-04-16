@@ -27,6 +27,7 @@ export class WordCounterCommand extends CommandEntity {
       title: 'Word Counter',
       description: `Words: ${words}, Lines: ${lines}, Characters: ${characters}`,
       mode: 'no-view',
+      type: 'script',
       icon: DEFAULT_ICON,
     });
 
