@@ -25,6 +25,7 @@ export function MainWindow() {
     skipTaskbar: true,
     alwaysOnTop: true,
     backgroundColor: '#212023',
+    roundedCorners: true,
 
     webPreferences: {
       spellcheck: false,
