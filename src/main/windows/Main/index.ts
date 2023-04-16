@@ -7,20 +7,23 @@ import {
   createTrayMenu,
   setVirtualState,
   loadShortcutsModule,
-} from '../modules';
+} from '@main/modules';
+import { createWindow } from '@main/factories';
+import { CommandModule } from '@main/modules/commands';
 
-import { createWindow } from '../factories';
-import { registerWindowByIPC } from './ipcs/window';
+import { registerWindowByIPC, registerSearchByIPC } from './ipcs';
 
 export function MainWindow() {
   const mainWindow = createWindow({
     id: 'main',
     width: 750,
     height: 56,
+    maxHeight: 475,
     show: false,
     frame: false,
     resizable: false,
     skipTaskbar: true,
+    alwaysOnTop: true,
     backgroundColor: '#212023',
 
     webPreferences: {
@@ -31,18 +34,20 @@ export function MainWindow() {
     },
   });
 
-  const screenModule = new ScreenModule(mainWindow);
-
-  setVirtualState({ screen: screenModule, mainWindow });
-
   PLATFORM.IS_MAC && mainWindow.setWindowButtonVisibility(false);
   ENVIRONMENT.IS_DEV && mainWindow.webContents.openDevTools({ mode: 'detach' });
 
-  mainWindow.setAlwaysOnTop(true, 'screen-saver');
+  setVirtualState({
+    screen: new ScreenModule(mainWindow),
+    command: new CommandModule(),
+    mainWindow,
+  });
 
   createTrayMenu();
   loadShortcutsModule();
+
   registerWindowByIPC();
+  registerSearchByIPC();
 
   return mainWindow;
 }
