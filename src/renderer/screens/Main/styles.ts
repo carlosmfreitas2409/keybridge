@@ -20,7 +20,10 @@ export const NavigationBar = styled.div`
 `;
 
 export const ContentBar = styled.div`
-  margin: 24px 10px 16px;
+  margin: 10px;
+
+  max-height: 475px;
+  overflow-y: auto;
 `;
 
 export const ActionBar = styled.div`

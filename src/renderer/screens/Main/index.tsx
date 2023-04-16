@@ -1,37 +1,29 @@
-import { useEffect, useState } from 'react';
-import { evaluate } from 'mathjs';
+import { ChangeEvent, useEffect, useState } from 'react';
 
-import { Highlight } from '@components/Highlight';
+import { CommandItemProps } from '@shared/types';
+
+import { Item } from '@components/List/Item';
 
 import { NavigationBar, ContentBar, ActionBar } from './styles';
-import { convertNumberToWords } from '@shared/utils/numberToWords';
-
-interface MathResult {
-  value: string;
-  written: string;
-}
 
 const { KeyBridge } = window;
 
 export function MainScreen() {
-  const [prompt, setPrompt] = useState<string>('');
-  const [mathResult, setMathResult] = useState<MathResult>();
+  const [searchResults, setSearchResults] = useState<CommandItemProps[]>([]);
 
-  function handleCalculateMath() {
-    try {
-      const result = evaluate(prompt);
+  function handlePromptChange(event: ChangeEvent<HTMLInputElement>) {
+    const value = event.target.value;
+    KeyBridge.search(value);
+  }
 
-      setMathResult({
-        value: String(result),
-        written: convertNumberToWords(result),
-      });
-    } catch (error) {
-      setMathResult(undefined);
-    }
+  function handleExecuteItem() {
+    KeyBridge.executeItem();
   }
 
   useEffect(() => {
-    handleCalculateMath();
+    KeyBridge.whenSearchReturns((results) => {
+      setSearchResults(results);
+    });
 
     KeyBridge.resizeWindow(
       document.body.clientWidth,
@@ -45,33 +37,27 @@ export function MainScreen() {
         <input
           type="text"
           placeholder="Search for apps and commands..."
-          onChange={(event) => setPrompt(event.target.value)}
+          onChange={handlePromptChange}
           autoFocus
         />
       </NavigationBar>
 
-      {prompt && (
-        <>
-          <ContentBar>
-            {mathResult && (
-              <Highlight
-                title="Calculator"
-                leftContent={{ title: prompt, hint: 'Equation' }}
-                rightContent={{
-                  title: mathResult.value,
-                  hint: mathResult.written,
-                }}
-              />
-            )}
-          </ContentBar>
+      <ContentBar>
+        {searchResults.map((item, index) => (
+          <Item
+            key={index}
+            title={item.title}
+            description={item.description}
+            icon={item.icon}
+            onClick={handleExecuteItem}
+          />
+        ))}
+      </ContentBar>
 
-          <ActionBar>
-            <span>Store</span>
-
-            <span>Show more</span>
-          </ActionBar>
-        </>
-      )}
+      <ActionBar>
+        <span>Store</span>
+        <span>Show more</span>
+      </ActionBar>
     </div>
   );
 }
