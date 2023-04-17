@@ -24,4 +24,8 @@ export abstract class CommandEntity {
   }
 
   public abstract search(query: string): void;
+
+  public isValid(_: string): boolean {
+    return true;
+  }
 }

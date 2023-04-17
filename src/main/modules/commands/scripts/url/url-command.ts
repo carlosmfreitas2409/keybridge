@@ -1,4 +1,5 @@
 import { Icon, IconType } from '@shared/types';
+import { isValidURL } from '@shared/helpers';
 
 import { CommandEntity } from '../../infra/command-entity';
 
@@ -11,6 +12,10 @@ export class UrlCommand extends CommandEntity {
       description: 'Open websites quickly by just typing the URL',
       icon: DEFAULT_ICON,
     });
+  }
+
+  public isValid(query: string): boolean {
+    return isValidURL(query);
   }
 
   public search(query: string): void {

@@ -9,7 +9,7 @@ export class UrlCommandItem extends CommandItemEntity {
     super(item);
   }
 
-  async execute(): Promise<void> {
+  public async execute(): Promise<void> {
     await shell.openExternal(this.item.title);
   }
 }
